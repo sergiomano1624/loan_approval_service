@@ -1,0 +1,8 @@
+databases
+fastapi
+alembic
+sqlalchemy
+psycopg2
+asyncpg
+pymysql
+uvicorn

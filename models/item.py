@@ -8,9 +8,9 @@ class Item(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     description = Column(String)
-    created_by = Column(String, nullable = True),
-    created_at = Column(DateTime(timezone=True), server_default=func.now()),
-    updated_by = Column(String(100), nullable=True),
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now()),
-    deleted_by = Column(String(100), nullable=True),
-    deleted_at = Column(DateTime(timezone=True), nullable=True)
+    # created_by = Column(String, nullable = True),
+    # created_at = Column(DateTime(timezone=True), server_default=func.now()),
+    # updated_by = Column(String(100), nullable=True),
+    # updated_at = Column(DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now()),
+    # deleted_by = Column(String(100), nullable=True),
+    # deleted_at = Column(DateTime(timezone=True), nullable=True)
