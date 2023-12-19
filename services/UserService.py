@@ -20,8 +20,8 @@ def getUserByID(db: Session, id: UUID):
     return db.query(Users).filter(Users.id == id, Users.deleted_at.is_(None)).first()
     # return db.query(Users).filter(Users.id == id).first()
 
-def getUsers(db: Session, user_type: str, skip: int = 0, limit: int = 100):
-    return db.query(Users).filter(Users.deleted_at.is_(None), Users.user_type == user_type).offset(skip).limit(limit).all()
+def getUsers(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(Users).filter(Users.deleted_at.is_(None)).offset(skip).limit(limit).all()
     # return db.query(Users).offset(skip).limit(limit).all()
 
 def getUserEmail(db: Session, email: str):

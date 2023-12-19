@@ -34,8 +34,8 @@ def read_user(id: UUID, db: Session = Depends(get_db)):
     return db_item
 
 @Userrouter.get("/", response_model=list[Users])
-def read_users(user_type: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return services.getUsers(db, user_type, skip, limit)
+def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    return services.getUsers(db, skip, limit)
 
 @Userrouter.put("/{id}", response_model=Users)
 def update_user(id: UUID, item: UserUpdate, db: Session = Depends(get_db)):
