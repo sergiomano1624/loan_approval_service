@@ -7,3 +7,5 @@ asyncpg
 pymysql
 uvicorn
 cloudinary
+passlib
+bcrypt
