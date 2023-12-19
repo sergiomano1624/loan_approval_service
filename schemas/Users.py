@@ -18,6 +18,8 @@ class UserCreate(UserBase):
 
 class Users(UserBase):
     id: UUID
+    created_at: Optional[datetime]
+    last_login: Optional[datetime]
     class Config:
         orm_mode = True
     # created_at: str
