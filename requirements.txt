@@ -6,3 +6,4 @@ psycopg2
 asyncpg
 pymysql
 uvicorn
+cloudinary
