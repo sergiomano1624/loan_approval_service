@@ -1,14 +1,6 @@
 services:
-  - type: web
-    name: loan-approval-service
+  - name: loan-approval-service
+    type: web
+    env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-
-databases:
-  - name: loan_approval
-    type: postgres
-    user: loan_approval_user
-    password: pbnpeLikiGqrPcoHRLZMa6EJn7aNGWLy
-    databaseName: loan_approval
-    env: python3
-    version: latest
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
