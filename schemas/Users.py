@@ -31,3 +31,6 @@ class UserUpdate(UserBase):
 
 class UserChangeStatus(BaseModel):
     status: int
+
+class UserUpdateLastLogin(BaseModel):
+    last_login: Optional[datetime]

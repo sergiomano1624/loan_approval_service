@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from models.Users import Users
-from schemas.Users import UserCreate, UserUpdate, UserChangeStatus
+from schemas.Users import UserCreate, UserUpdate, UserChangeStatus, UserUpdateLastLogin
 from datetime import datetime
 from uuid import UUID
 from passlib.context import CryptContext
@@ -8,9 +8,9 @@ from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def createUser(db: Session, data: UserCreate):
-    hashed_password = pwd_context.hash("test")
+    # hashed_password = pwd_context.hash("test")
     db_item = Users(**data.dict())
-    db_item.password = hashed_password
+    db_item.password = "test"
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
@@ -25,9 +25,18 @@ def getUsers(db: Session, skip: int = 0, limit: int = 100):
     # return db.query(Users).offset(skip).limit(limit).all()
 
 def getUserEmail(db: Session, email: str):
+    # print(email)
     return db.query(Users).filter(Users.email == email).first()
 
 def updateUser(db: Session, item_id: UUID, item: UserUpdate):
+    db_item = db.query(Users).filter(Users.id == item_id).first()
+    for key, value in item.dict().items():
+        setattr(db_item, key, value)
+    db.commit()
+    db.refresh(db_item)
+    return db_item
+
+def updateUserLastLogin(db: Session, item_id: UUID, item: UserUpdateLastLogin):
     db_item = db.query(Users).filter(Users.id == item_id).first()
     for key, value in item.dict().items():
         setattr(db_item, key, value)

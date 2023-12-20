@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from config import db as database
 from services import UserService as services
-from schemas.Users import Users, UserCreate, UserUpdate, UserChangeStatus
+from schemas.Users import Users, UserCreate, UserUpdate, UserChangeStatus, UserUpdateLastLogin
 # from utils.jwt import create_access_token, decode_token
 from datetime import timedelta
 from uuid import UUID
@@ -26,6 +26,14 @@ def create_user(item: UserCreate, db: Session = Depends(get_db)):
     #     "message": "Created successfully"
     # }
 
+@Userrouter.get("/email", response_model=Users)
+def read_user_by_email(email: str, db: Session = Depends(get_db)):
+    print(email)
+    db_item = services.getUserEmail(db, email)
+    if db_item is None:
+        raise HTTPException(status_code=404, detail="Data not found")
+    return db_item
+
 @Userrouter.get("/{id}", response_model=Users)
 def read_user(id: UUID, db: Session = Depends(get_db)):
     db_item = services.getUserByID(db, id)
@@ -39,6 +47,13 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @Userrouter.put("/{id}", response_model=Users)
 def update_user(id: UUID, item: UserUpdate, db: Session = Depends(get_db)):
+    db_item = services.getUserByID(db, id)
+    if db_item is None:
+        raise HTTPException(status_code=404, detail="Data not found")
+    return services.updateUser(db, id, item)
+
+@Userrouter.put("/{id}/last_login", response_model=Users)
+def update_user(id: UUID, item: UserUpdateLastLogin, db: Session = Depends(get_db)):
     db_item = services.getUserByID(db, id)
     if db_item is None:
         raise HTTPException(status_code=404, detail="Data not found")
