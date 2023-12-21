@@ -9,3 +9,4 @@ uvicorn
 cloudinary
 passlib
 bcrypt
+python-multipart
