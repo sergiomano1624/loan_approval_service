@@ -41,7 +41,7 @@ def create_bank_account(
 
 @BankAccountRouter.get("/{id}", response_model=BankAccounts)
 def read_BankAccount(id: int, db: Session = Depends(get_db)):
-    db_item = services.getBankAccountByID(db, id)
+    db_item = services.getBankAccountByApplicationID(db, id)
     if db_item is None:
         raise HTTPException(status_code=404, detail="Data not found")
     return db_item

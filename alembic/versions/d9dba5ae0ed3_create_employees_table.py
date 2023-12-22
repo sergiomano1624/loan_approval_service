@@ -37,7 +37,7 @@ def upgrade() -> None:
         sa.Column("ctc", sa.String(255), unique=False, nullable=True),
         sa.Column("password_hash", sa.String(255), unique=False, nullable=True),
         sa.Column("role_type", sa.String(255), nullable=True),
-        sa.Column("status", sa.Integer, server_default='0'),
+        sa.Column("status", sa.String(255), server_default='Active'),
     )
 
 

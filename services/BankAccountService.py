@@ -61,8 +61,8 @@ def createBankAccount(db: Session, application_id, bank_name, bank_code, bank_ac
             db.refresh(docData)
         return {"message": "Bank account added successfully"}
 
-def getBankAccountByID(db: Session, id: UUID):
-    return db.query(BankAccounts).filter(BankAccounts.id == id, BankAccounts.deleted_at.is_(None)).first()
+def getBankAccountByApplicationID(db: Session, id: UUID):
+    return db.query(BankAccounts).filter(BankAccounts.application_id == id, BankAccounts.deleted_at.is_(None)).first()
     # return db.query(BankAccounts).filter(BankAccounts.id == id).first()
 
 def getBankAccounts(db: Session, skip: int = 0, limit: int = 100):
