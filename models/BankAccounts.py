@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, TEXT
+from sqlalchemy import Column, Integer, String, DateTime, TEXT, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from config.db import Base
@@ -9,7 +9,7 @@ class BankAccounts(Base):
     __tablename__ = "bank_accounts"
 
     id = Column(Integer, primary_key=True, index=True)
-    application_id = Column(Integer, index=True)
+    application_id = Column(Integer, ForeignKey("applications.id"))
     bank_name = Column(String(255))
     bank_code = Column(String(255))
     bank_account_no = Column(String(255))
@@ -22,6 +22,5 @@ class BankAccounts(Base):
     deleted_by = Column(String, nullable=True)
     deleted_at = Column(DateTime(timezone=True), nullable=True)
 
-    # clientUsers = relationship("ClientAdmin", back_populates="clientUsers")
-    # recruiterUsers = relationship("RecruiterAdmin", back_populates="recruiter_users")
-    # resumeUsers = relationship("Resume", back_populates="resume_users")
+    # Relationships
+    applicationBankAccounts = relationship("Applications", back_populates="applicationBankAccounts")

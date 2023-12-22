@@ -24,7 +24,11 @@ class Applications(Base):
     monthly_income = Column(String(255))
     public_id = Column(String(255))
     secure_url = Column(String(255))
-    status = Column(String(255))
+    date = Column(String(255), nullable=True)
+    amount_offered = Column(String(255), nullable=True)
+    type = Column(String(255), nullable=True)
+    comments = Column(String(255), nullable=True)
+    status = Column(String(255), nullable=True)
     created_by = Column(String, nullable = False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_by = Column(String, nullable=True)
@@ -32,6 +36,5 @@ class Applications(Base):
     deleted_by = Column(String, nullable=True)
     deleted_at = Column(DateTime(timezone=True), nullable=True)
 
-    # clientUsers = relationship("ClientAdmin", back_populates="clientUsers")
-    # recruiterUsers = relationship("RecruiterAdmin", back_populates="recruiter_users")
-    # resumeUsers = relationship("Resume", back_populates="resume_users")
+    # Relationships
+    applicationBankAccounts = relationship("BankAccounts", back_populates="applicationBankAccounts")

@@ -78,6 +78,9 @@ def changeBankAccountStatus(db: Session, item_id: UUID, req: BankAccountChangeSt
 def getDocumentByID(db: Session, id: id):
     return db.query(Documents).filter(Documents.id == id, Documents.deleted_at.is_(None)).first()
 
+def getDocumentByBankAccountID(db: Session, id: int):
+    return db.query(Documents).filter(Documents.bank_account_id == id, Documents.deleted_at.is_(None)).all()
+
 def deleteDocuments(db: Session, id: id, deleted_by: str):
     db_item = db.query(Documents).filter(Documents.id == id).first()
     if db_item:

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from models.Applications import Applications
-from schemas.Applications import ApplicationCreate, ApplicationChangeStatus
+from schemas.Applications import ApplicationCreate, ApplicationChangeStatus, ApplicationUpdate
 from datetime import datetime
 from uuid import UUID
 from passlib.context import CryptContext
@@ -26,6 +26,7 @@ def createApplication(db: Session, borrower_name, email, address, mobile, dob, g
         monthly_income=monthly_income,
         public_id='',
         secure_url=cloudinary_response["url"],
+        status="Waiting for Approval",
         created_by=created_by)
     db.add(users)
     db.commit()
@@ -37,6 +38,14 @@ def getApplicationByID(db: Session, id: UUID):
 
 def getApplications(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Applications).filter(Applications.deleted_at.is_(None)).offset(skip).limit(limit).all()
+
+def updateApplication(db: Session, item_id: int, item: ApplicationUpdate):
+    db_item = db.query(Applications).filter(Applications.id == item_id).first()
+    for key, value in item.dict().items():
+        setattr(db_item, key, value)
+    db.commit()
+    db.refresh(db_item)
+    return db_item
 
 def changeApplicationStatus(db: Session, item_id: UUID, req: ApplicationChangeStatus):
     getData = db.query(Applications).filter(Applications.id == item_id).first()

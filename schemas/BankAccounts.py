@@ -1,6 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel
 from typing import Optional
+from schemas.Applications import Applications
 class BankAccountBase(BaseModel):
     application_id: int
     bank_name: Optional[str] = None
@@ -16,7 +17,8 @@ class BankAccountCreate(BankAccountBase):
 
 class BankAccounts(BankAccountBase):
     id: int
-    created_at: Optional[datetime]
+    created_at: Optional[datetime] = None
+    applicationBankAccounts: Applications
     class Config:
         orm_mode = True
     # created_at: str

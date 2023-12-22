@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, File, Form, UploadFile
 from sqlalchemy.orm import Session
 from config import db as database
 from services import BankAccountService as services
+from schemas.Documents import Documents
 from schemas.BankAccounts import BankAccounts, BankAccountCreate, BankAccountUpdate, BankAccountChangeStatus
 # from utils.jwt import create_access_token, decode_token
 from datetime import timedelta
@@ -57,8 +58,15 @@ def change_status(id: int, req: BankAccountChangeStatus, db: Session = Depends(g
     services.changeBankAccountStatus(db, id, req)
     return db_item
 
+@BankAccountRouter.get("/{bank_account_id}/docs", response_model=list[Documents])
+def get_docs_by_bank_account_id(bank_account_id: int, db: Session = Depends(get_db)):
+    db_item = services.getDocumentByBankAccountID(db, bank_account_id)
+    if db_item is None:
+        raise HTTPException(status_code=404, detail="Data not found")
+    return db_item
+
 @BankAccountRouter.put("/{id}/docs/delete")
-def delete_BankAccount(id: int, deleted_by: str, db: Session = Depends(get_db)):
+def delete_Document(id: int, deleted_by: str, db: Session = Depends(get_db)):
     db_item = services.getDocumentByID(db, id)
     if db_item is None:
         raise HTTPException(status_code=404, detail="Data not found")
