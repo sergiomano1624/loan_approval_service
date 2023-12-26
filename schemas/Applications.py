@@ -10,12 +10,12 @@ class ApplicationBase(BaseModel):
     dob: Optional[str] = None
     gender: Optional[str] = None
     credit_product: Optional[str] = None
-    loan_amount: int
+    loan_amount: Optional[str] = None
     term: int
     interest: int
-    repayment_period: int
+    repayment_period: Optional[str] = None
     trn_no: Optional[str] = None
-    monthly_income: int
+    monthly_income: Optional[str] = None
     secure_url: Optional[str] = None
     date: Optional[str] = None
     amount_offered: int
