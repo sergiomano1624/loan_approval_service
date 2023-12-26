@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, TEXT
+from sqlalchemy import Column, Integer, String, DateTime, TEXT, BIGINT
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from config.db import Base
@@ -16,16 +16,16 @@ class Applications(Base):
     dob = Column(String(100))
     gender = Column(String(100))
     credit_product = Column(String(255))
-    loan_amount = Column(String(255))
-    term = Column(String(255))
-    interest = Column(String(255))
-    repayment_period = Column(String(255))
+    loan_amount = Column(BIGINT)
+    term = Column(BIGINT)
+    interest = Column(BIGINT)
+    repayment_period = Column(BIGINT)
     trn_no = Column(String(255))
-    monthly_income = Column(String(255))
+    monthly_income = Column(BIGINT)
     public_id = Column(String(255))
     secure_url = Column(String(255))
     date = Column(String(255), nullable=True)
-    amount_offered = Column(String(255), nullable=True)
+    amount_offered = Column(BIGINT)
     type = Column(String(255), nullable=True)
     comments = Column(String(255), nullable=True)
     status = Column(String(255), nullable=True)

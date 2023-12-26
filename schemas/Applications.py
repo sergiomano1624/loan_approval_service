@@ -10,15 +10,15 @@ class ApplicationBase(BaseModel):
     dob: Optional[str] = None
     gender: Optional[str] = None
     credit_product: Optional[str] = None
-    loan_amount: Optional[str] = None
-    term: Optional[str] = None
-    interest: Optional[str] = None
-    repayment_period: Optional[str] = None
+    loan_amount: int
+    term: int
+    interest: int
+    repayment_period: int
     trn_no: Optional[str] = None
-    monthly_income: Optional[str] = None
+    monthly_income: int
     secure_url: Optional[str] = None
     date: Optional[str] = None
-    amount_offered: Optional[str] = None
+    amount_offered: int
     type: Optional[str] = None
     comments: Optional[str] = None
     status: Optional[str] = None
@@ -37,7 +37,7 @@ class Applications(ApplicationBase):
 
 class ApplicationUpdate(BaseModel):
     date: Optional[str] = None
-    amount_offered: Optional[str] = None
+    amount_offered: Optional[int] = None
     type: Optional[str] = None
     comments: Optional[str] = None
     status: Optional[str] = None

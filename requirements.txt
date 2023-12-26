@@ -10,3 +10,4 @@ cloudinary
 passlib
 bcrypt
 python-multipart
+python-dateutil
