@@ -25,7 +25,7 @@ class Applications(Base):
     public_id = Column(String(255))
     secure_url = Column(String(255))
     date = Column(String(255), nullable=True)
-    amount_offered = Column(BIGINT)
+    amount_offered = Column(String(255), nullable=True)
     type = Column(String(255), nullable=True)
     comments = Column(String(255), nullable=True)
     status = Column(String(255), nullable=True)

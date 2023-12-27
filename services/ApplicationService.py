@@ -27,7 +27,6 @@ def createApplication(db: Session, borrower_name, email, address, mobile, dob, g
         public_id='',
         secure_url=cloudinary_response["url"],
         status="Waiting for Approval",
-        amount_offered=0,
         created_by=created_by)
     db.add(users)
     db.commit()

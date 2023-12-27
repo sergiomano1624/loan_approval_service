@@ -18,9 +18,10 @@ def getLoanPayments(db: Session, skip: int = 0, limit: int = 100):
 def disbursePayment(db: Session, id: int):
     getApplicationById = db.query(Applications).filter(Applications.id == id, Applications.deleted_at.is_(None)).first()
 
+    amountOfferd = int(getApplicationById.amount_offered.replace(",", ""))
     noOfMonths = getApplicationById.term * 12 | 12
     interest = getApplicationById.interest / 100
-    totalReturned = getApplicationById.amount_offered + interest
+    totalReturned = amountOfferd + interest
 
     monthlyFee = totalReturned / noOfMonths
 
@@ -31,7 +32,7 @@ def disbursePayment(db: Session, id: int):
         loanPayments = LoanPayments(
             loan_application_id=id,
             payment_date=current_date.date(),
-            principal=getApplicationById.amount_offered,
+            principal=amountOfferd,
             interest=getApplicationById.interest,
             amount=round(monthlyFee, 2),
             status="Disbursed"

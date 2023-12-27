@@ -18,7 +18,7 @@ class ApplicationBase(BaseModel):
     monthly_income: Optional[str] = None
     secure_url: Optional[str] = None
     date: Optional[str] = None
-    amount_offered: int
+    amount_offered: Optional[str] = None
     type: Optional[str] = None
     comments: Optional[str] = None
     status: Optional[str] = None
@@ -37,7 +37,7 @@ class Applications(ApplicationBase):
 
 class ApplicationUpdate(BaseModel):
     date: Optional[str] = None
-    amount_offered: Optional[int] = None
+    amount_offered: Optional[str] = None
     type: Optional[str] = None
     comments: Optional[str] = None
     status: Optional[str] = None

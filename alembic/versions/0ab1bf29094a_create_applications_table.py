@@ -43,7 +43,7 @@ def upgrade() -> None:
         sa.Column("public_id", sa.String(255), nullable=True),
         sa.Column("secure_url", sa.String(255), nullable=True),
         sa.Column("date", sa.String(255), nullable=True),
-        sa.Column("amount_offered", sa.BIGINT(), server_default="0", nullable=True),
+        sa.Column("amount_offered", sa.String(255), nullable=True),
         sa.Column("type", sa.String(255), nullable=True),
         sa.Column("comments", sa.String(255), nullable=True),
         sa.Column("status", sa.String(255), nullable=True),
